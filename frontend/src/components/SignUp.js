@@ -19,7 +19,8 @@ export default function SignUp() {
                 <Form handleSearchSubmit={handleSignUpSubmit} className='shadow p-3 mb-5 bg-body rounded d-grid gap-3'>
                     <Input className="form-control me-2" name='username' type="text" placeholder="Username" />
                     <Input className="form-control me-2" name='email' type="email" placeholder="Email" />
-                    <Input className="form-control me-2 " type="password" placeholder="Password" />
+                    <Input className="form-control me-2 " name='password' type="password" placeholder="Password" />
+                    <Input className="form-control me-2 " name='confirmpassword' type="password" placeholder="Password" />
                     <div className='text-center'>
                         <Button className="btn btn-primary" type="submit" text='Sign Up' />
                     </div>
