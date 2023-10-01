@@ -24,6 +24,9 @@ export default function Nav() {
                             <li className="nav-item">
                                 <Link className="nav-link" to="/image-meme">Image meme</Link>
                             </li>
+                            <li className="nav-item">
+                                <Link className="btn btn-outline-success" to="/login">Login</Link>
+                            </li>
                         </ul>
                         <Form handleSearchSubmit={handleSearchSubmit} className={'d-flex'}>
                             <Input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
