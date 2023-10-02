@@ -1,7 +1,5 @@
 import db from "../models";
-import bcrypt from "bcryptjs"
-import { config } from 'dotenv';
-config();
+import { hashPass } from "./hashPassService";
 
 const checkIssetEmail = async (email) => {
     const user = await db.User.findOne({ where: { email: email }, attributes: ['username', 'email'] });
@@ -16,26 +14,26 @@ const checkIssetUsername = async (username) => {
 }
 
 
-// ma hoa password
-const hashPass = (password) => {
-    let salt = bcrypt.genSaltSync(10);
-    let hash = bcrypt.hashSync(password, salt);
-    return hash
-}
-
-//so sanh password
-const compareHashPass = (password) => {
-    return bcrypt.compareSync(password, hash); // false
-}
 
 const userService = {
     signUp: async (username, password, confirmpassword, email) => {
         let issetEmail = await checkIssetEmail(email);
         let issetUsername = await checkIssetUsername(username);
-        if (issetEmail == 1 && issetUsername == 1) {
-            return 'Username or Email already exist';
+        if (issetEmail == 1) return {
+            message: 'Email already exist',
+            signUp: false,
+            status: 401
+        };
+        if (issetUsername == 1) return {
+            message: 'Username already exist',
+            signUp: false,
+            status: 401
+        };
+        if (password !== confirmpassword) return {
+            message: 'Password confirm is not correct!',
+            signUp: false,
+            status: 401
         }
-        if (password !== confirmpassword) return 'Password confirm is not correct!'
         const user = await db.User.create({
             username,
             password: hashPass(password),
@@ -43,7 +41,11 @@ const userService = {
             isadmin: 0
         })
         await user.save();
-        return 'Sign Up successfully';
+        return {
+            message: 'Sign Up successfully',
+            signUp: true,
+            status: 200
+        };
     }
 }
 

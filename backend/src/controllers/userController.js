@@ -10,16 +10,12 @@ const userController = {
         const { username, password, confirmpassword, email } = req.body
         console.log(username, password, confirmpassword, email)
         try {
-            const userStatus = await userService.signUp(username, password, confirmpassword, email);
-            return res.status(200).json(userStatus)
+            const userSignUp = await userService.signUp(username, password, confirmpassword, email);
+            return res.status(userSignUp.status).json(userSignUp)
         } catch (error) {
-            return res.status().json('Can not Sign Up');
+            return res.status(500).json('Can not Sign Up');
         }
     },
-
-    login: async(req, res)=>{
-        
-    }
 }
 
 export default userController;
