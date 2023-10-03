@@ -4,7 +4,7 @@ import authService from "../services/authService";
 const authController = {
     login: async (req, res) => {
         try {
-            const { username, password } = req.body
+            const { username, password } = req.body 
             const { accessToken, refreshToken, message, login, status } = await authService.loginService(username, password);
             res.cookie('refreshToken', refreshToken, { maxAge: 3600000 * 24 * 30, httpOnly: true })
             return res.status(status).json({

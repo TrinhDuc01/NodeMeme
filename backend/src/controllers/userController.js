@@ -7,8 +7,11 @@ const userController = {
     },
 
     signUp: async (req, res) => {
-        const { username, password, confirmpassword, email } = req.body
-        console.log(username, password, confirmpassword, email)
+        const username = req.body.username == undefined ? '' : req.body.username
+        const email = req.body.email == undefined ? '' : req.body.email
+        const password = req.body.password == undefined ? '' : req.body.password
+        const confirmpassword = req.body.confirmpassword == undefined ? '' : req.body.confirmpassword
+        // console.log(username, password, confirmpassword, email)
         try {
             const userSignUp = await userService.signUp(username, password, confirmpassword, email);
             return res.status(userSignUp.status).json(userSignUp)

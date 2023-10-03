@@ -1,4 +1,5 @@
 import db from "../models";
+import { checkInputNull } from "./checkService";
 import { hashPass } from "./hashPassService";
 
 const checkIssetEmail = async (email) => {
@@ -19,6 +20,12 @@ const userService = {
     signUp: async (username, password, confirmpassword, email) => {
         let issetEmail = await checkIssetEmail(email);
         let issetUsername = await checkIssetUsername(username);
+        const checkIsNull = checkInputNull([username, password, confirmpassword, email])
+        if (checkIsNull) return {
+            message: 'Please fill in all information into the field!',
+            signUp: false,
+            status: 401
+        };
         if (issetEmail == 1) return {
             message: 'Email already exist',
             signUp: false,

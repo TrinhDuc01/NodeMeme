@@ -1,10 +1,11 @@
 import express from 'express'
 import { config } from 'dotenv';
-import { initMemeRoute } from './routes/meme';
+import { initMemeRoute } from './routes/memeRoute';
 import cors from 'cors'
 import cookieParser from 'cookie-parser'
 import { initAuthRoute } from './routes/authRoute';
 import { initUserRoute } from './routes/userRoute';
+import { initCategoryRoute } from './routes/categoryRoute';
 config();
 const app = express();
 const port = process.env.PORTAUTH || 3030
@@ -16,6 +17,7 @@ app.use(cookieParser())
 initMemeRoute(app)
 initAuthRoute(app)
 initUserRoute(app)
+initCategoryRoute(app)
 
 app.get('/', (req, res) => {
     // res.cookie('myCookie', 'Hello, World!', { maxAge: 3600000*24*30*12 }); // maxAge được tính bằng miligiây
