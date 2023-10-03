@@ -6,7 +6,7 @@ const authController = {
         try {
             const { username, password } = req.body
             const { accessToken, refreshToken, message, login, status } = await authService.loginService(username, password);
-            res.cookie('refreshToken', refreshToken, { maxAge: 3600 * 24 * 30, httpOnly: true })
+            res.cookie('refreshToken', refreshToken, { maxAge: 3600000 * 24 * 30, httpOnly: true })
             return res.status(status).json({
                 accessToken,
                 message,
@@ -25,12 +25,17 @@ const authController = {
                 ...refreshSuccess,
                 refreshToken: '',
             }
+            res.cookie('refreshToken', refreshSuccess.refreshToken, { maxAge: 3600000 * 24 * 30, httpOnly: true })
             res.status(refreshSuccess.status).json(data);
         } catch (error) {
             return res.status(500).json(error);
         }
 
     },
+    logout: async (req,res)=>{
+        res.clearCookie("refreshToken");
+        return res.status(200).json("Logout successfully!")
+    }
 };
 
 export default authController;

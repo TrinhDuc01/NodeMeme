@@ -18,7 +18,8 @@ initAuthRoute(app)
 initUserRoute(app)
 
 app.get('/', (req, res) => {
-    res.send('token')
+    // res.cookie('myCookie', 'Hello, World!', { maxAge: 3600000*24*30*12 }); // maxAge được tính bằng miligiây
+  res.send('Cookie đã được thiết lập.');
 })
 
 app.listen(port, () => {
