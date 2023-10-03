@@ -15,6 +15,15 @@ const tokenService = {
             return false;
         }
     },
+    checkIssetToken: async (refreshToken) => {
+        return await db.RefreshToken.findOne({ where: { token: refreshToken || '' } });
+    },
+    updateRefeshToken: async (newRefreshToken, userId) => {
+        const oldRefreshToken = await db.RefreshToken.findOne({ where: { UserId: userId } });
+        oldRefreshToken.token = newRefreshToken;
+        await oldRefreshToken.save();
+    }
+    ,
     saveRefreshToken: async (refreshToken, userId) => {
         try {
             const saveRefreshToken = await db.RefreshToken.create({ token: refreshToken, UserId: userId })

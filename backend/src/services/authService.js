@@ -15,12 +15,12 @@ const authService = {
         let refreshToken = '';
         // payload
         const userInfo = {
+            id: user.id,
             username: user.username,
             email: user.email,
             isadmin: user.isadmin
         }
-        
-        
+
         // kiem tra dang nhap
         if (hasNull) return {
             message: "Please fill in all information into the field!",
@@ -32,7 +32,7 @@ const authService = {
             login: false,
             status: 401
         }
-        
+
         // kiem tra trong db co refresh token chua
         const checkIssetRefreshToken = await db.RefreshToken.findOne({ where: { UserId: user.id } });
         if (checkIssetRefreshToken) refreshToken = checkIssetRefreshToken.token;
@@ -48,7 +48,36 @@ const authService = {
             status: 200
         }
     },
-
+    refreshAccessToken: async (refreshToken) => {
+        const oldRefreshToken = await tokenService.checkIssetToken(refreshToken)// kiem tra refresh token co trong db khong
+        if (!refreshToken) return {
+            message: "You're not authenticated, khong co refresh token!",
+            status: 401
+        }
+        if (!oldRefreshToken) return {
+            message: "Refresh Token is not valid!",
+            status: 403
+        }
+        try {
+            const payload = tokenService.verifyToken(refreshToken, refreshKey);
+            const userPayload = {
+                id: payload.id,
+                username: payload.username,
+                email: payload.email
+            }
+            const newRefreshToken = tokenService.generateToken(userPayload, refreshKey, 3600 * 24 * 30)
+            await tokenService.updateRefeshToken(refreshToken, userPayload.id);
+            const newAccessToken = tokenService.generateToken(userPayload, accessKey, 3600);
+            return {
+                accessToken: newAccessToken,
+                refreshToken: newRefreshToken,
+                message: "Refresh Token is not valid!",
+                status: 200
+            }
+        } catch (error) {
+            return res.status(500).json(error);
+        }
+    }
 
 
 }

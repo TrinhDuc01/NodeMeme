@@ -18,11 +18,9 @@ initAuthRoute(app)
 initUserRoute(app)
 
 app.get('/', (req, res) => {
-    
     res.send('token')
 })
 
 app.listen(port, () => {
-    console.log(`Server authentication is running in port ${port}`)
+    console.log(`Server is running in port ${port}`)
 })
-

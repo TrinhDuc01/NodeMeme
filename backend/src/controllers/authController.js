@@ -1,7 +1,6 @@
 
 import authService from "../services/authService";
 
-
 const authController = {
     login: async (req, res) => {
         try {
@@ -15,15 +14,22 @@ const authController = {
                 status
             });
         } catch (error) {
-            return res.status(500).json("Server error");
+            return res.status(500).json(error);
         }
     },
     refreshToken: async (req, res) => {
+        const refreshToken = req.cookies.refreshToken
         try {
-
+            const refreshSuccess = await authService.refreshAccessToken(refreshToken);
+            const data = {
+                ...refreshSuccess,
+                refreshToken: '',
+            }
+            res.status(refreshSuccess.status).json(data);
         } catch (error) {
-            return res.status(500).json("Server error");
+            return res.status(500).json(error);
         }
+
     },
 };
 
