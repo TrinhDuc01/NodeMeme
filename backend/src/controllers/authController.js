@@ -26,7 +26,7 @@ const authController = {
                 refreshToken: '',
             }
             res.cookie('refreshToken', refreshSuccess.refreshToken, { maxAge: 3600000 * 24 * 30, httpOnly: true })
-            res.status(refreshSuccess.status).json(data);
+            return res.status(refreshSuccess.status).json(data);
         } catch (error) {
             return res.status(500).json(error);
         }
