@@ -39,8 +39,8 @@ const categoryService = {
             status: 200
         };
     },
-    updateCategory: async (id, name) => {
-        const isNull = checkInputNull([id, name])
+    updateCategory: async (id, name, isActive) => {
+        const isNull = checkInputNull([id, name, isActive])
         if (isNull) return {
             message: "Please fill in all information into the field!",
             get: false,
@@ -53,12 +53,16 @@ const categoryService = {
             status: 200
         };
         category.name = name;
+        category.isActive = isActive
         await category.save();
         return {
             message: "Update category successfully!",
             get: true,
             status: 200
         };
+    },
+    getAllCategory: async () => {
+        return db.Category.findAll();
     }
 }
 

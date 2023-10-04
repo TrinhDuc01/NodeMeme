@@ -9,9 +9,16 @@ import { initCategoryRoute } from './routes/categoryRoute';
 config();
 const app = express();
 const port = process.env.PORTAUTH || 3030
+const urlFrontend = process.env.URLFRONTEND || 'http://localhost:3000'
 
 app.use(express.json())
-app.use(cors())
+
+app.use(cors({
+  origin: urlFrontend,
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true, // Cho phép gửi cookie
+}));
+
 app.use(cookieParser())
 
 initMemeRoute(app)
@@ -20,10 +27,10 @@ initUserRoute(app)
 initCategoryRoute(app)
 
 app.get('/', (req, res) => {
-    // res.cookie('myCookie', 'Hello, World!', { maxAge: 3600000*24*30*12 }); // maxAge được tính bằng miligiây
+  // res.cookie('myCookie', 'Hello, World!', { maxAge: 3600000*24*30*12 }); // maxAge được tính bằng miligiây
   res.send('Cookie đã được thiết lập.');
 })
 
 app.listen(port, () => {
-    console.log(`Server is running in port ${port}`)
+  console.log(`Server is running in port ${port}`)
 })

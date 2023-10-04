@@ -1,12 +1,14 @@
 import { Router } from "express";
 import categoryController from "../controllers/categoryController";
+import authMiddleware from "../middleware/authMiddleware";
 
 const route = Router();
 
 export const initCategoryRoute = (app) => {
-    route.post('/create',categoryController.createCategory);
-    route.post('/update/:id',categoryController.getUpdateCategory);
-    route.post('/update',categoryController.updateCategory);
-    
+    route.post('/create', authMiddleware.verifyTokenAndAdminAuth, categoryController.createCategory);
+    route.post('/update/:id', authMiddleware.verifyTokenAndAdminAuth, categoryController.getUpdateCategory);
+    route.post('/update', authMiddleware.verifyTokenAndAdminAuth, categoryController.updateCategory);
+    route.post('/get-all', categoryController.getAllCategory);
+
     return app.use('/api/category', route);
 }
