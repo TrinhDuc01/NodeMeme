@@ -14,6 +14,9 @@ module.exports = {
       urlfile: {
         type: Sequelize.STRING
       },
+      type: {
+        type: Sequelize.STRING
+      },
       CategoryId: {
         type: Sequelize.INTEGER
       },

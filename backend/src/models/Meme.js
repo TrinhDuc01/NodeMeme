@@ -18,6 +18,7 @@ module.exports = (sequelize, DataTypes) => {
     Meme.init({
         name: DataTypes.STRING,
         urlfile: DataTypes.STRING,
+        type: DataTypes.STRING,
         CategoryId: DataTypes.INTEGER
     }, {
         sequelize,
