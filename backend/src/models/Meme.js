@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
          */
         static associate(models) {
             // define association here
-            Meme.hasOne(models.Category);
+            Meme.belongsTo(models.Category);
         }
     };
     Meme.init({
