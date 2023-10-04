@@ -59,14 +59,17 @@ const authService = {
             status: 403
         }
         try {
-            const payload = tokenService.verifyToken(refreshToken, refreshKey);
+            const payload = tokenService.verifyToken(refreshToken, refreshKey); // tra ve payload
             const userPayload = {
                 id: payload.id,
                 username: payload.username,
                 email: payload.email
             }
+            //tao moi refresh token
             const newRefreshToken = tokenService.generateToken(userPayload, refreshKey, 3600 * 24 * 30)
-            await tokenService.updateRefeshToken(refreshToken, userPayload.id);
+            //sua token trong db
+            await tokenService.updateRefeshToken(newRefreshToken, userPayload.id);
+            //tao moi access token
             const newAccessToken = tokenService.generateToken(userPayload, accessKey, 3600);
             return {
                 accessToken: newAccessToken,
