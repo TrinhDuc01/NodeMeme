@@ -1,8 +1,8 @@
 import React from 'react'
-import Text from './Text'
-import Form from './Form'
-import Input from './Input'
-import Button from './Button'
+import Text from '../components/Text'
+import Form from '../components/Form'
+import Input from '../components/Input'
+import Button from '../components/Button'
 import { Link } from 'react-router-dom'
 
 export default function Login() {

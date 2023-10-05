@@ -1,8 +1,8 @@
-import Body from "./components/Body";
-import ListAudioMeme from "./components/ListAudioMeme";
-import ListImageMeme from "./components/ListImageMeme";
-import Login from "./components/Login";
-import SignUp from "./components/SignUp";
+import Body from "./pages/Body";
+import ListAudioMeme from "./pages/ListAudioMeme";
+import ListImageMeme from "./pages/ListImageMeme";
+import Login from "./pages/Login";
+import SignUp from "./pages/SignUp";
 import Nav from "./nav/Nav";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 

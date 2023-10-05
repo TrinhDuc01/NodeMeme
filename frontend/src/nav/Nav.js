@@ -24,14 +24,14 @@ export default function Nav() {
                             <li className="nav-item">
                                 <Link className="nav-link" to="/image-meme">Image meme</Link>
                             </li>
-                            <li className="nav-item">
-                                <Link className="btn btn-outline-success" to="/login">Login</Link>
-                            </li>
+                            <Form handleSearchSubmit={handleSearchSubmit} className={'d-flex'}>
+                                <Input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+                                <Button className="btn btn-outline-success" type="submit" text='Search' />
+                            </Form>
                         </ul>
-                        <Form handleSearchSubmit={handleSearchSubmit} className={'d-flex'}>
-                            <Input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                            <Button className="btn btn-outline-success" type="submit" text='Search'/>
-                        </Form>
+
+                        <Link className="btn btn-outline-success" to="/login">Login</Link>
+
                     </div>
                 </div>
             </nav>

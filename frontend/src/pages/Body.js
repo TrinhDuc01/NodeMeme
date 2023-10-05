@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Home from './Home'
 import video from '../video/rickRoll.mp4'
-import Button from './Button'
+import Button from '../components/Button'
 export default function Body() {
     const [toggle, setToggle] = useState(false);
 
