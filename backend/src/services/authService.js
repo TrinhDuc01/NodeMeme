@@ -24,27 +24,30 @@ const authService = {
         // kiem tra dang nhap
         if (hasNull) return {
             message: "Please fill in all information into the field!",
-            login: false,
             status: 401
         }
         if (!checkLogin) return {
             message: "Username or password is not correct!",
-            login: false,
             status: 401
         }
 
         // kiem tra trong db co refresh token chua
         const checkIssetRefreshToken = await db.RefreshToken.findOne({ where: { UserId: user.id } });
-        if (checkIssetRefreshToken) refreshToken = checkIssetRefreshToken.token;
+        if (checkIssetRefreshToken) {
+            refreshToken = tokenService.generateToken(userInfo, refreshKey, 10);
+            await tokenService.updateRefeshToken(refreshToken, userInfo.id);
+        }
+
         else {
-            refreshToken = tokenService.generateToken(userInfo, refreshKey, 3600 * 24 * 30);//exp 1 monnth
+            //tạo mới refresh token khi đăng nhập lần đầu
+            refreshToken = tokenService.generateToken(userInfo, refreshKey, 1);//exp 1 monnth
             await tokenService.saveRefreshToken(refreshToken, user.id);
         }
         return {
+            userInfo,
             accessToken: tokenService.generateToken(userInfo, accessKey, 3600),//create access token
             refreshToken,// refresh token
             message: "Login successfully!",
-            login: true,
             status: 200
         }
     },
@@ -65,8 +68,11 @@ const authService = {
                 username: payload.username,
                 email: payload.email
             }
+            if (!payload) {
+                return false;
+            }
             //tao moi refresh token
-            const newRefreshToken = tokenService.generateToken(userPayload, refreshKey, 3600 * 24 * 30)
+            const newRefreshToken = tokenService.generateToken(userPayload, refreshKey, 10)
             //sua token trong db
             await tokenService.updateRefeshToken(newRefreshToken, userPayload.id);
             //tao moi access token
@@ -74,7 +80,7 @@ const authService = {
             return {
                 accessToken: newAccessToken,
                 refreshToken: newRefreshToken,
-                message: "Refresh Token is not valid!",
+                message: "Refresh Token OK!",
                 status: 200
             }
         } catch (error) {
