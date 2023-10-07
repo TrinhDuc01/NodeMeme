@@ -8,7 +8,8 @@ import { logoutUser } from '../api/apiLoginRequest';
 
 export default function Nav() {
 
-    const user = useSelector(state => state.auth.login.currentUser)
+    const user = useSelector(state => state.auth.login.currentUser?.userInfo)
+    // console.log(user)
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -43,7 +44,7 @@ export default function Nav() {
 
                         {user ?
                             <>
-                                <Button className="btn btn-primary" type="button" text={`${user?.userInfo.username}`} />
+                                <Button className="btn btn-primary" type="button" text={`${user?.username}`} />
                                 <Button className="btn btn-danger" handleClick={handleLogout} type="button" text='Logout' />
                             </>
                             :
