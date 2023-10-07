@@ -10,7 +10,7 @@ const userController = {
         const username = req.body.username == undefined ? '' : req.body.username
         const email = req.body.email == undefined ? '' : req.body.email
         const password = req.body.password == undefined ? '' : req.body.password
-        const confirmpassword = req.body.confirmpassword == undefined ? '' : req.body.confirmpassword
+        const confirmpassword = req.body.confirmPassword == undefined ? '' : req.body.confirmPassword
         // console.log(username, password, confirmpassword, email)
         try {
             const userSignUp = await userService.signUp(username, password, confirmpassword, email);
