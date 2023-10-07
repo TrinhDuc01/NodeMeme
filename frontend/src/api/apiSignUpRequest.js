@@ -1,11 +1,11 @@
 import { toast } from "react-toastify";
-import { instanceAxios } from "./config";
+import { axiosSever } from "./config";
 
 
 
 export const signUpUser = async (user) => {
     try {
-        const res = await instanceAxios.post("api/user/sign-up", user);
+        const res = await axiosSever.post("api/user/sign-up", user);
         console.log(res)
         toast.success(res?.data.message);
     } catch (error) {
