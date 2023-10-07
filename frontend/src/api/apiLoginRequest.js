@@ -1,13 +1,13 @@
 
 import { toast } from 'react-toastify';
 import { loginFailed, loginStart, loginSuccess, logoutSuccess } from '../redux/authSlice';
-import { instanceAxios } from './config'
+import { axiosAuth } from './config'
 
 
 export const loginUser = async (user, dispatch, naviagte) => {
     dispatch(loginStart());
     try {
-        const res = await instanceAxios.post("api/auth/login", user);
+        const res = await axiosAuth.post("api/auth/login", user);
         console.log(res.data.userInfo.isadmin)
         toast.success(res.data.message)
         dispatch(loginSuccess({
@@ -15,7 +15,6 @@ export const loginUser = async (user, dispatch, naviagte) => {
             accessToken: res.data.accessToken
         }));
         res.data.userInfo.isadmin ? naviagte("/admin/category") : naviagte("/");
-
     } catch (error) {
         // neu res 40x thi no chay vao day, lay response tu error
         toast.error(error.response?.data.message)
@@ -25,7 +24,7 @@ export const loginUser = async (user, dispatch, naviagte) => {
 
 export const logoutUser = async (dispatch) => {
     try {
-        const res = await instanceAxios.post("api/auth/logout");
+        const res = await axiosAuth.post("api/auth/logout");
         toast.success(res.data)
         dispatch(logoutSuccess());
     } catch (error) {
