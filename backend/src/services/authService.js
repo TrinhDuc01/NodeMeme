@@ -45,7 +45,7 @@ const authService = {
         }
         return {
             userInfo,
-            accessToken: tokenService.generateToken(userInfo, accessKey, 3600),//create access token
+            accessToken: tokenService.generateToken(userInfo, accessKey, 360),//create access token
             refreshToken,// refresh token
             message: "Login successfully!",
             status: 200
@@ -66,7 +66,8 @@ const authService = {
             const userPayload = {
                 id: payload.id,
                 username: payload.username,
-                email: payload.email
+                email: payload.email,
+                isadmin: payload.isadmin
             }
             if (!payload) {
                 return false;
@@ -76,7 +77,7 @@ const authService = {
             //sua token trong db
             await tokenService.updateRefeshToken(newRefreshToken, userPayload.id);
             //tao moi access token
-            const newAccessToken = tokenService.generateToken(userPayload, accessKey, 3600);
+            const newAccessToken = tokenService.generateToken(userPayload, accessKey, 360);
             return {
                 accessToken: newAccessToken,
                 refreshToken: newRefreshToken,
