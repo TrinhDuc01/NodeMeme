@@ -24,7 +24,7 @@ const authService = {
         // kiem tra dang nhap
         if (hasNull) return {
             message: "Please fill in all information into the field!",
-            status: 401
+            status: 403
         }
         if (!checkLogin) return {
             message: "Username or password is not correct!",
@@ -34,13 +34,13 @@ const authService = {
         // kiem tra trong db co refresh token chua
         const checkIssetRefreshToken = await db.RefreshToken.findOne({ where: { UserId: user.id } });
         if (checkIssetRefreshToken) {
-            refreshToken = tokenService.generateToken(userInfo, refreshKey, 10);
+            refreshToken = tokenService.generateToken(userInfo, refreshKey, 3600 * 10 * 24);
             await tokenService.updateRefeshToken(refreshToken, userInfo.id);
         }
 
         else {
             //tạo mới refresh token khi đăng nhập lần đầu
-            refreshToken = tokenService.generateToken(userInfo, refreshKey, 1);//exp 1 monnth
+            refreshToken = tokenService.generateToken(userInfo, refreshKey, 3600 * 24 * 30);//exp 1 monnth
             await tokenService.saveRefreshToken(refreshToken, user.id);
         }
         return {
@@ -72,7 +72,7 @@ const authService = {
                 return false;
             }
             //tao moi refresh token
-            const newRefreshToken = tokenService.generateToken(userPayload, refreshKey, 10)
+            const newRefreshToken = tokenService.generateToken(userPayload, refreshKey, 3600 * 24 * 30)
             //sua token trong db
             await tokenService.updateRefeshToken(newRefreshToken, userPayload.id);
             //tao moi access token

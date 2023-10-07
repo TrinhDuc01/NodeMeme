@@ -23,22 +23,18 @@ const userService = {
         const checkIsNull = checkInputNull([username, password, confirmpassword, email])
         if (checkIsNull) return {
             message: 'Please fill in all information into the field!',
-            signUp: false,
             status: 401
         };
         if (issetEmail == 1) return {
             message: 'Email already exist',
-            signUp: false,
             status: 401
         };
         if (issetUsername == 1) return {
             message: 'Username already exist',
-            signUp: false,
             status: 401
         };
         if (password !== confirmpassword) return {
             message: 'Password confirm is not correct!',
-            signUp: false,
             status: 401
         }
         const user = await db.User.create({
@@ -50,7 +46,6 @@ const userService = {
         await user.save();
         return {
             message: 'Sign Up successfully',
-            signUp: true,
             status: 200
         };
     }
