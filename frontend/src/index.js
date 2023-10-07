@@ -8,13 +8,16 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 import { Provider } from 'react-redux';
 import store, { persistor } from './redux/store'
 import ToastifyContainer from './components/ToastifyContainer';
+import { PersistGate } from 'redux-persist/integration/react';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
-      <ToastifyContainer />
+      <PersistGate loading={null} persistor={persistor}>
+        <App />
+        <ToastifyContainer />
+      </PersistGate>
     </Provider>
   </React.StrictMode>
 );
