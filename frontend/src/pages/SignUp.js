@@ -4,6 +4,7 @@ import Form from '../components/Form';
 import Input from '../components/Input';
 import Button from '../components/Button';
 import { signUpUser } from '../api/apiSignUpRequest';
+import { Link } from 'react-router-dom';
 
 export default function SignUp() {
     const [username, setUsername] = useState('');
@@ -31,7 +32,7 @@ export default function SignUp() {
         <div className='row mt-lg-5 d-block d-lg-flex'>
             <div className='col-lg-2'></div>
             <div className='col-lg-5 mt-2 mt-lg-5'>
-                <Text className='fs-1 text-primary fw-bold text-lg-start text-center' text='Meme' />
+                <Link to='/' className='fs-1 text-decoration-none fw-bold text-lg-start text-center'>Meme</Link>
                 <Text className='fs-3 d-none d-lg-block' text="Meme sign up page. If you're just viewing memes, there's no need to register." />
             </div>
             <div className='col-lg-4 mt-lg-5'>

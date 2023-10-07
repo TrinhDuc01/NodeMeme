@@ -8,12 +8,14 @@ export const loginUser = async (user, dispatch, naviagte) => {
     dispatch(loginStart());
     try {
         const res = await instanceAxios.post("api/auth/login", user);
+        console.log(res.data.userInfo.isadmin)
         toast.success(res.data.message)
         dispatch(loginSuccess({
             userInfo: res.data.userInfo,
             accessToken: res.data.accessToken
         }));
-        naviagte("/");
+        res.data.userInfo.isadmin ? naviagte("/admin/category") : naviagte("/");
+
     } catch (error) {
         // neu res 40x thi no chay vao day, lay response tu error
         toast.error(error.response?.data.message)

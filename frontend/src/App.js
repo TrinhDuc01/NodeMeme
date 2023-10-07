@@ -5,6 +5,7 @@ import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import Nav from "./nav/Nav";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import CategoryManage from "./pages/CategoryManage";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           </Route>
           <Route path="/login" element={<Login />} />
           <Route path="/sign-up" element={<SignUp />} />
+          <Route path="/admin/category" element={<CategoryManage />} />
         </Routes>
       </BrowserRouter>
     </div>
