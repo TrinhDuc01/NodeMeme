@@ -1,10 +1,21 @@
-import React from 'react'
-import { Link, Outlet } from 'react-router-dom';
+import React, { useState } from 'react'
+import { Link, Outlet, useNavigate } from 'react-router-dom';
 import Form from '../components/Form';
 import Input from '../components/Input';
 import Button from '../components/Button';
+import { useDispatch, useSelector } from 'react-redux';
+import { logoutUser } from '../api/apiLoginRequest';
 
 export default function Nav() {
+
+    const user = useSelector(state => state.auth.login.currentUser)
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        logoutUser(dispatch, navigate)
+    }
+
     const handleSearchSubmit = (e) => {
         e.preventDefault();
     }
@@ -30,8 +41,17 @@ export default function Nav() {
                             </Form>
                         </ul>
 
-                        <Link className="btn btn-outline-success" to="/login">Login</Link>
-
+                        {user ?
+                            <>
+                                <Button className="btn btn-primary" type="button" text={`${user?.userInfo.username}`} />
+                                <Button className="btn btn-danger" handleClick={handleLogout} type="button" text='Logout' />
+                            </>
+                            :
+                            <>
+                                <Link className="btn btn-outline-success" to="/login">Login</Link>
+                                <Link className="btn btn-success" to='/sign-up'>SignUp</Link>
+                            </>
+                        }
                     </div>
                 </div>
             </nav>
