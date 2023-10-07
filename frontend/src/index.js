@@ -5,11 +5,17 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
+import { Provider } from 'react-redux';
+import store, { persistor } from './redux/store'
+import ToastifyContainer from './components/ToastifyContainer';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <App />
+      <ToastifyContainer />
+    </Provider>
   </React.StrictMode>
 );
 
