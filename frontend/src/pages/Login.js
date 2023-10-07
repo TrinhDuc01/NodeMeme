@@ -1,13 +1,29 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Text from '../components/Text'
 import Form from '../components/Form'
 import Input from '../components/Input'
 import Button from '../components/Button'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { loginUser } from '../api/apiLoginRequest'
 
 export default function Login() {
+
+    const [username, setUsername] = useState("")
+    const [password, setPassword] = useState("")
+
+    const dispatch = useDispatch();
+    const naviagte = useNavigate();
+
     const handleLoginSubmit = (e) => {
         e.preventDefault();
+        const user = {
+            username,
+            password
+        };
+        loginUser(user, dispatch, naviagte);
+        setUsername('');
+        setPassword('');
     }
     return (
         <div className='row mt-lg-5 d-block d-lg-flex'>
@@ -18,10 +34,14 @@ export default function Login() {
             </div>
             <div className='col-lg-4 mt-lg-5'>
                 <Form handleSearchSubmit={handleLoginSubmit} className='shadow p-3 mb-5 bg-body rounded d-grid gap-2'>
-                    <Input className="form-control me-2" name='username' type="text" placeholder="Username"/>
-                    <Input className="form-control me-2" name='password' type="password" placeholder="Password"/>
+                    <Input handleOnchange={e => setUsername(e.target.value)} value={username}
+                        className='form-control me-2'
+                        name='username' type="text" placeholder="Username" />
+                    <Input handleOnchange={e => setPassword(e.target.value)} value={password}
+                        className='form-control me-2'
+                        name='password' type="password" placeholder="Password" />
                     <div className='text-center'>
-                        <Button className="btn btn-primary" type="submit" text='Login'/>
+                        <Button className="btn btn-primary" type="submit" text='Login' />
                     </div>
                     <div className='text-center border-top p-2'>
                         <Link className="btn btn-success" to='/sign-up'>SignUp</Link>
