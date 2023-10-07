@@ -29,7 +29,7 @@ export default function Login() {
         <div className='row mt-lg-5 d-block d-lg-flex'>
             <div className='col-lg-2'></div>
             <div className='col-lg-5 mt-2 mt-lg-5'>
-                <Text className='fs-1 text-primary fw-bold text-lg-start text-center' text='Meme' />
+                <Link to='/' className='fs-1 text-decoration-none fw-bold text-lg-start text-center'>Meme</Link>
                 <Text className='fs-3 d-none d-lg-block' text="Meme Login page. You don't need to log in" />
             </div>
             <div className='col-lg-4 mt-lg-5'>
