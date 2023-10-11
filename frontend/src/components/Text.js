@@ -1,7 +1,10 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 
-export default function Text({ text, className }) {
+export default function Text({ text, className, handleClick }) {
+    let color = useSelector(state => state.color.currentColor)
+    // console.log(color.textColor)
     return (
-        <p className={className}>{text}</p>
+        <p onClick={handleClick} className={className} style={{ color: color?.textColor }}>{text}</p>
     )
 }

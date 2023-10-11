@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
-import jwt_decode from "jwt-decode";
 import Form from '../components/Form';
 import Input from '../components/Input';
 import Button from '../components/Button';
@@ -13,18 +12,11 @@ import { loginSuccess } from '../redux/authSlice';
 export default function CategoryManage() {
     const user = useSelector(state => state.auth.login.currentUser);
     const [categoryName, setCategoryName] = useState('')
-    const naviagte = useNavigate();
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     let axiosRefeshToken = createAxiosRefreshToken(user?.accessToken, dispatch, loginSuccess); // tra ve 1 axios kiem tra access token
     console.log(user?.accessToken)
-
-    let decode;
-    if (user) decode = jwt_decode(user?.accessToken)// giai ma lay payload cua access token
-
-    useEffect(() => {
-        if (!decode.isadmin) naviagte('/') // khong phai admin thi ve trang chu
-    }, [])
-
+    
     const handleSubmit = (e) => {
         e.preventDefault();
         const category = {
@@ -32,7 +24,7 @@ export default function CategoryManage() {
             isActive: 1
         }
 
-        createCategory(category, naviagte, user?.accessToken, axiosRefeshToken);//tao 1 category 
+        createCategory(category, navigate, user?.accessToken, axiosRefeshToken);//tao 1 category 
         setCategoryName('')
     }
 

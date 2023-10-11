@@ -10,13 +10,9 @@ import jwt_decode from 'jwt-decode'
 import NavComponent from '../components/NavComponent';
 import LinkTo from '../components/LinkTo';
 import ChangeTheme from './ChangeTheme';
+export default function NavAdmin() {
 
-
-
-export default function Nav() {
-
-    const user = useSelector(state => state.auth.login.currentUser)
-    
+    let user = useSelector(state => state.auth.login.currentUser);
     // console.log(user)
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -24,9 +20,7 @@ export default function Nav() {
     let decode;
     if (user) { decode = jwt_decode(user?.accessToken) }// giai ma lay payload cua access token
 
-
-    if (decode?.isadmin) return <Navigate to="/admin/category" /> // khong phai admin thi ve trang chu
-
+    if (!decode?.isadmin) return <Navigate to="/" /> // khong phai admin thi ve trang chu
 
     const handleLogout = () => {
         logoutUser(dispatch, navigate)
@@ -35,52 +29,38 @@ export default function Nav() {
     const handleSearchSubmit = (e) => {
         e.preventDefault();
     }
-
-    const handleNavigate = (url) => {
-        return navigate(url)
-    }
-
-
-    
     return (
         <>
             <NavComponent className="navbar navbar-expand-lg">
                 <div className="container-fluid">
-                    <LinkTo className="navbar-brand" to="/" text='Meme'></LinkTo>
+                    <LinkTo className="navbar-brand fs-4" to="/admin" text='Meme' />
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                             <li className="nav-item">
-                                <LinkTo className="nav-link active" to="/audio-meme" text='Audio'></LinkTo>
+                                <LinkTo className="nav-link active" aria-current="page" to="/audio-meme" text='Audio meme' />
                             </li>
                             <li className="nav-item">
-                                <LinkTo className="nav-link" to="/image-meme" text='Image'></LinkTo>
+                                <LinkTo className="nav-link" to="/image-meme" text='Image meme' />
                             </li>
-
                             <Form handleSearchSubmit={handleSearchSubmit} className={'d-flex'}>
                                 <Input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
                                 <Button className="btn btn-outline-success" type="submit" text='Search' />
                             </Form>
                         </ul>
 
-                        {user ?
+                        {user &&
                             <>
-                                <Text className="my-auto fs-3 me-3" type="button" text={`Hi, ${user?.userInfo.username}`} />
+                                <Text className="my-auto fs-4 mx-3" type="button" text={`Hi, ${user?.userInfo.username}`} />
                                 <Button className="btn btn-danger" handleClick={handleLogout} type="button" text='Logout' />
                             </>
-                            :
-                            <>
-                                <Button className="btn btn-outline-success" handleClick={() => handleNavigate('/login')} to="/login" text='Login'></Button>
-                                <Button className="btn btn-success mx-2" handleClick={() => handleNavigate("/sign-up")} to='/sign-up' text='SignUp'></Button>
-                            </>
                         }
-                        <ChangeTheme/>
+                        <ChangeTheme />
                     </div>
                 </div>
             </NavComponent>
-
             <div style={{
                 //thanh duoi nav
                 height: 1,

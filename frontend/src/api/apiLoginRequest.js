@@ -22,11 +22,12 @@ export const loginUser = async (user, dispatch, naviagte) => {
     }
 }
 
-export const logoutUser = async (dispatch) => {
+export const logoutUser = async (dispatch, navigate) => {
     try {
         const res = await axiosAuth.post("api/auth/logout");
         toast.success(res.data)
         dispatch(logoutSuccess());
+        navigate('/');
     } catch (error) {
         // neu res 40x thi no chay vao day, lay response tu error
         console.log(error)

@@ -1,5 +1,6 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import authReducer from "./authSlice";
+import colorReducer from "./colorSlice"
 import {
     persistStore,
     persistReducer,
@@ -18,6 +19,7 @@ const persistConfig = {
 }
 const rootReducer = combineReducers({
     auth: authReducer,
+    color: colorReducer
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 const store = configureStore({

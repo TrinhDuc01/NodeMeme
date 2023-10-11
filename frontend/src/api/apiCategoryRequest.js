@@ -1,5 +1,4 @@
 import { toast } from "react-toastify";
-import { axiosAuth } from "./config";
 
 export const createCategory = async (category, naviagte, accessToken, axiosRefeshToken) => {
     try {
