@@ -1,6 +1,7 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import authReducer from "./authSlice";
 import colorReducer from "./colorSlice"
+import categoryReducer from "./categorySlice"
 import {
     persistStore,
     persistReducer,
@@ -19,7 +20,8 @@ const persistConfig = {
 }
 const rootReducer = combineReducers({
     auth: authReducer,
-    color: colorReducer
+    color: colorReducer,
+    category: categoryReducer
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 const store = configureStore({

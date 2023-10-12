@@ -10,6 +10,7 @@ import jwt_decode from 'jwt-decode'
 import NavComponent from '../components/NavComponent';
 import LinkTo from '../components/LinkTo';
 import ChangeTheme from './ChangeTheme';
+import { IoPawOutline } from 'react-icons/io5';
 
 
 
@@ -46,7 +47,7 @@ export default function Nav() {
         <>
             <NavComponent className="navbar navbar-expand-lg">
                 <div className="container-fluid">
-                    <LinkTo className="navbar-brand" to="/" text='Meme'></LinkTo>
+                <LinkTo className="navbar-brand fs-4" to="/admin" ><IoPawOutline size={50}/></LinkTo>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>

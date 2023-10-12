@@ -1,7 +1,5 @@
 import React from 'react'
 import { Navigate, Outlet, useNavigate } from 'react-router-dom';
-import Form from '../components/Form';
-import Input from '../components/Input';
 import Button from '../components/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import { logoutUser } from '../api/apiLoginRequest';
@@ -10,6 +8,7 @@ import jwt_decode from 'jwt-decode'
 import NavComponent from '../components/NavComponent';
 import LinkTo from '../components/LinkTo';
 import ChangeTheme from './ChangeTheme';
+import { IoPawOutline } from "react-icons/io5";
 export default function NavAdmin() {
 
     let user = useSelector(state => state.auth.login.currentUser);
@@ -26,29 +25,22 @@ export default function NavAdmin() {
         logoutUser(dispatch, navigate)
     }
 
-    const handleSearchSubmit = (e) => {
-        e.preventDefault();
-    }
     return (
         <>
             <NavComponent className="navbar navbar-expand-lg">
                 <div className="container-fluid">
-                    <LinkTo className="navbar-brand fs-4" to="/admin" text='Meme' />
+                    <LinkTo className="navbar-brand fs-4" to="/admin" ><IoPawOutline size={50} /></LinkTo>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                             <li className="nav-item">
-                                <LinkTo className="nav-link active" aria-current="page" to="/audio-meme" text='Audio meme' />
+                                <LinkTo className="nav-link active" aria-current="page" to="/admin/category" text='Category' />
                             </li>
                             <li className="nav-item">
-                                <LinkTo className="nav-link" to="/image-meme" text='Image meme' />
+                                <LinkTo className="nav-link" to="/meme" text='Meme' />
                             </li>
-                            <Form handleSearchSubmit={handleSearchSubmit} className={'d-flex'}>
-                                <Input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                                <Button className="btn btn-outline-success" type="submit" text='Search' />
-                            </Form>
                         </ul>
 
                         {user &&

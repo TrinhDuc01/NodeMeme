@@ -4,7 +4,7 @@ import Form from '../components/Form';
 import Input from '../components/Input';
 import Button from '../components/Button';
 import { signUpUser } from '../api/apiSignUpRequest';
-import { Link, useNavigate } from 'react-router-dom';
+import {  useNavigate } from 'react-router-dom';
 
 export default function SignUp() {
     const [username, setUsername] = useState('');
