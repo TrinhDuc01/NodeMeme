@@ -3,15 +3,15 @@ import { checkInputNull } from "./checkService";
 
 
 const categoryService = {
-    createCategory: async (name, isActive) => {
-        const isNull = checkInputNull([name, isActive]);
+    createCategory: async (name) => {
+        const isNull = checkInputNull([name]);
         console.log(isNull)
         if (isNull) return {
             message: "Please fill in all information into the field!",
             create: false,
             status: 401
         }
-        const category = await db.Category.create({ name, isActive })
+        const category = await db.Category.create({ name, isActive: 1 })
         await category.save();
         return {
             message: "Create category successfully!",

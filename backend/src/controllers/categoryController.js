@@ -8,9 +8,8 @@ const categoryController = {
         try {
             const dataCategory = {
                 name: req.body.name == undefined ? '' : req.body.name,
-                isActive: req.body.isActive == undefined ? '' : req.body.name
             }
-            const createCategoryState = await categoryService.createCategory(dataCategory.name, dataCategory.isActive)
+            const createCategoryState = await categoryService.createCategory(dataCategory.name)
             return res.status(createCategoryState.status).json(createCategoryState)
         } catch (error) {
             res.status(500).json(error)
