@@ -3,7 +3,7 @@ import ReactPaginate from 'react-paginate'
 import React, { useState } from 'react'
 import TableListCategory from './TableListCategory';
 
-export default function PaginateItemCategory({ items, itemsPerPage, children }) {
+export default function PaginateItemCategory({ items, itemsPerPage, axiosRefeshToken }) {
     // Here we use item offsets; we could also use page offsets
     // following the API or data you're working with.
     const [itemOffset, setItemOffset] = useState(0);
@@ -27,27 +27,29 @@ export default function PaginateItemCategory({ items, itemsPerPage, children }) 
 
     return (
         <>
-            <TableListCategory currentListCategory={currentItems} />
-            <ReactPaginate
-                nextLabel="next >"
-                onPageChange={handlePageClick}
-                pageRangeDisplayed={3}
-                marginPagesDisplayed={2}
-                pageCount={pageCount}
-                previousLabel="< previous"
-                pageClassName="page-item"
-                pageLinkClassName="page-link"
-                previousClassName="page-item"
-                previousLinkClassName="page-link"
-                nextClassName="page-item"
-                nextLinkClassName="page-link"
-                breakLabel="..."
-                breakClassName="page-item"
-                breakLinkClassName="page-link"
-                containerClassName="pagination"
-                activeClassName="active"
-                renderOnZeroPageCount={null}
-            />
+            <TableListCategory axiosRefeshToken={axiosRefeshToken} items={items} currentListCategory={currentItems} />
+            <div className='d-flex justify-content-center'>
+                <ReactPaginate
+                    nextLabel="Sau >"
+                    onPageChange={handlePageClick}
+                    pageRangeDisplayed={3}
+                    marginPagesDisplayed={2}
+                    pageCount={pageCount}
+                    previousLabel="< Trước"
+                    pageClassName="page-item"
+                    pageLinkClassName="page-link"
+                    previousClassName="page-item"
+                    previousLinkClassName="page-link"
+                    nextClassName="page-item"
+                    nextLinkClassName="page-link"
+                    breakLabel="..."
+                    breakClassName="page-item"
+                    breakLinkClassName="page-link"
+                    containerClassName="pagination"
+                    activeClassName="active"
+                    renderOnZeroPageCount={null}
+                />
+            </div>
         </>
     );
 }
