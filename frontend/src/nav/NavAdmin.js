@@ -45,7 +45,7 @@ export default function NavAdmin() {
 
                         {user &&
                             <>
-                                <Text className="my-auto fs-4 mx-3" type="button" text={`Hi, ${user?.userInfo.username}`} />
+                                <Text className="my-auto fs-4 mr-3" type="button" text={`Hi, ${user?.userInfo.username}`} />
                                 <Button className="btn btn-danger" handleClick={handleLogout} type="button" text='Logout' />
                             </>
                         }
