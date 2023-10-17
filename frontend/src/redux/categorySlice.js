@@ -7,7 +7,10 @@ const categorySlice = createSlice({
 
         ],
         categoryUpdate: {
+            update: {
 
+            },
+            showModalUpdateCategory: false
         }
     },
     reducers: {
@@ -15,13 +18,20 @@ const categorySlice = createSlice({
             state.listCategory = action.payload;
         },
         categoryUpdate: (state, action) => {
-            state.categoryUpdate = action.payload;
+            state.categoryUpdate.update = action.payload;
+            state.categoryUpdate.showModalUpdateCategory = true;
+        },
+        categoryUpdateSuccessfully: (state) => {
+            state.categoryUpdate.update = {};
+            state.categoryUpdate.showModalUpdateCategory = false;
         },
     }
 })
 
 export const {
-    categoryListSuccess
+    categoryListSuccess,
+    categoryUpdate,
+    categoryUpdateSuccessfully
 } = categorySlice.actions;
 
 export default categorySlice.reducer
