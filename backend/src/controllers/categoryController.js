@@ -25,7 +25,7 @@ const categoryController = {
     },
     getUpdateCategory: async (req, res) => {
         try {
-            const categoryId = req.params.id;
+            const categoryId = req.body.id;
             const data = await categoryService.getCategoryUpdate(categoryId);
             res.status(data.status).json(data)
         } catch (error) {
