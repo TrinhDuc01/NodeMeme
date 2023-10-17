@@ -6,7 +6,7 @@ const route = Router();
 
 export const initCategoryRoute = (app) => {
     route.post('/create', authMiddleware.verifyTokenAndAdminAuth, categoryController.createCategory);
-    route.post('/update/:id', authMiddleware.verifyTokenAndAdminAuth, categoryController.getUpdateCategory);
+    route.post('/get-update', authMiddleware.verifyTokenAndAdminAuth, categoryController.getUpdateCategory);
     route.post('/update', authMiddleware.verifyTokenAndAdminAuth, categoryController.updateCategory);
     route.post('/get-all', categoryController.getAllCategory);
 
