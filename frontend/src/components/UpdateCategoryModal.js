@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Button from 'react-bootstrap/Button';
+import Button from '../components/Button';
 import Modal from 'react-bootstrap/Modal';
 import { useDispatch, useSelector } from 'react-redux';
 import { categoryUpdateSuccessfully } from '../redux/categorySlice';
@@ -14,6 +14,7 @@ export default function UpdateCategoryModal({axiosRefeshToken}) {
     const dispatch = useDispatch();
     const naviagte = useNavigate();
     const handleSuccess = () => {
+        console.log('he')
         dispatch(categoryUpdateSuccessfully());
     }
     let categoryUpdate = useSelector(state => state.category.categoryUpdate);
@@ -55,10 +56,10 @@ export default function UpdateCategoryModal({axiosRefeshToken}) {
                             <option value={0}>Disable</option>
                         </select>
                         <div className='text-end'>
-                            <Button variant="primary" onClick={handleUpdateSubmit}>
+                            <Button type='submit' className='btn me-1' handleClick={handleUpdateSubmit}>
                                 Update
                             </Button>
-                            <Button variant="primary" onClick={handleSuccess}>
+                            <Button type='button' className='btn' handleClick={handleSuccess}>
                                 Close
                             </Button>
                         </div>

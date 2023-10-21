@@ -6,8 +6,8 @@ import Button from '../components/Button';
 import { createCategory, getAllCategory } from '../api/apiCategoryRequest';
 import { createAxiosRefreshToken } from '../api/apiRefreshToken';
 import { loginSuccess } from '../redux/authSlice';
-import PaginateItem from '../components/PaginateItemCategory';
 import UpdateCategoryModal from '../components/UpdateCategoryModal';
+import TableListCategory from '../components/TableListCategory';
 
 
 
@@ -35,7 +35,7 @@ export default function CategoryManage() {
 
 
     return (
-        <div className='row mt-lg-1 d-block d-lg-flex gap-2'>
+        <div className='row mx-1 mt-lg-1 d-block d-lg-flex gap-2 '>
             <UpdateCategoryModal axiosRefeshToken={axiosRefeshToken} />
             <div className='col-3'></div>
             <div className='col-lg-6 my-1'>
@@ -46,7 +46,7 @@ export default function CategoryManage() {
                     <Button className="btn btn-primary" type="submit" text='Create' />
                 </Form>
             </div>
-            <PaginateItem items={categoryList} itemsPerPage={7} axiosRefeshToken={axiosRefeshToken} />
+            <TableListCategory axiosRefeshToken={axiosRefeshToken}/>
         </div>
     )
 }

@@ -41,7 +41,6 @@ export const getCategoryUpdate = async (dispatch, accessToken, id, axiosRefeshTo
             },
 
         });
-        // console.log(res.data)
         dispatch(categoryUpdate(res.data));
         console.log(res.data)
     } catch (error) {

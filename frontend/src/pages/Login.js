@@ -48,7 +48,7 @@ export default function Login() {
                         <Button className="btn btn-primary" type="submit" text='Login' />
                     </div>
                     <div className='text-center border-top p-2'>
-                        <Button handleClick={()=>handleNavigate('/sign-up')} className="btn btn-success" to='/sign-up' text='SignUp'>SignUp</Button>
+                        <Button handleClick={()=>handleNavigate('/sign-up')} className="btn btn-success" to='/sign-up' text='SignUp'></Button>
                     </div>
                 </Form>
             </div>

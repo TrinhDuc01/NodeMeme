@@ -11,6 +11,7 @@ import NavComponent from '../components/NavComponent';
 import LinkTo from '../components/LinkTo';
 import ChangeTheme from './ChangeTheme';
 import { IoPawOutline } from 'react-icons/io5';
+import LineUnderNav from '../components/LineUnderNav';
 
 
 
@@ -68,7 +69,7 @@ export default function Nav() {
 
                         {user ?
                             <>
-                                <Text className="my-auto fs-3 me-3" type="button" text={`Hi, ${user?.userInfo.username}`} />
+                                <Text className="my-auto fs-3 me-2" type="button" text={`Hi, ${user?.userInfo.username}`} />
                                 <Button className="btn btn-danger" handleClick={handleLogout} type="button" text='Logout' />
                             </>
                             :
@@ -81,14 +82,7 @@ export default function Nav() {
                     </div>
                 </div>
             </NavComponent>
-
-            <div style={{
-                //thanh duoi nav
-                height: 1,
-                backgroundImage: "linear-gradient(90deg,rgba(0,0,0,0.00) 0%,#000000 50%,rgba(0,0,0,0.00) 100%)",
-                opacity: 0.1,
-                width: "100%"
-            }}></div >
+            <LineUnderNav/>
             <Outlet />
         </>
     )
