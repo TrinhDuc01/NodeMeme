@@ -2,6 +2,7 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import authReducer from "./authSlice";
 import colorReducer from "./colorSlice"
 import categoryReducer from "./categorySlice"
+import memeReducer from "./memeSlice"
 import {
     persistStore,
     persistReducer,
@@ -21,7 +22,8 @@ const persistConfig = {
 const rootReducer = combineReducers({
     auth: authReducer,
     color: colorReducer,
-    category: categoryReducer
+    category: categoryReducer,
+    meme: memeReducer
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 const store = configureStore({
