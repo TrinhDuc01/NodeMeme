@@ -8,6 +8,7 @@ import Nav from "../nav/Nav";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import CategoryManage from "../pages/CategoryManage";
 import NavAdmin from "../nav/NavAdmin";
+import MemeManage from '../pages/MemeManage';
 
 export default function Router() {
     return (
@@ -23,6 +24,7 @@ export default function Router() {
                 <Route path="/admin/" element={<NavAdmin />}>
                     <Route index element={<CategoryManage />} />
                     <Route path="category" element={<CategoryManage />} />
+                    <Route path="meme" element={<MemeManage />} />
                 </Route>
             </Routes>
         </BrowserRouter>
