@@ -40,7 +40,7 @@ export default function NavAdmin() {
                                 <LinkTo className="nav-link active" aria-current="page" to="/admin/category" text='Category' />
                             </li>
                             <li className="nav-item">
-                                <LinkTo className="nav-link" to="/meme" text='Meme' />
+                                <LinkTo className="nav-link" to="/admin/meme" text='Meme' />
                             </li>
                         </ul>
 
