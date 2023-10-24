@@ -1,4 +1,4 @@
-import React from 'react'
+
 import { BsSun } from 'react-icons/bs'
 import { CiDark } from 'react-icons/ci'
 import { TbMilkshake } from 'react-icons/tb'

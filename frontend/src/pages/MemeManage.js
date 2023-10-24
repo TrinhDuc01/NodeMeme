@@ -1,4 +1,4 @@
-import React from 'react'
+
 import Button from '../components/Button'
 import Text from '../components/Text'
 import { useDispatch, useSelector } from 'react-redux'

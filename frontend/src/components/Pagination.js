@@ -1,5 +1,4 @@
-import React from 'react';
-import classnames from 'classnames';
+
 import { usePagination, DOTS } from '../HOOK/usePagination';
 import { MdNavigateNext, MdNavigateBefore } from "react-icons/md";
 import DivColor from './DivColor';

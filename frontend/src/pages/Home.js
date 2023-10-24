@@ -1,4 +1,4 @@
-import React from 'react'
+
 export default function Home({ className, width, height, video, auto }) {
     return (
         <video className={className} width={width} height={height} autoPlay loop>

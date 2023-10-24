@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import Home from './Home'
 import video from '../video/rickRoll.mp4'
 import Button from '../components/Button'
