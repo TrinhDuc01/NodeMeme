@@ -32,7 +32,7 @@ export const createAxiosRefreshToken = (accessToken, dispatch, loginSuccess) => 
             //kiem tra access token het han chua neu het han thi tao accesstoken va refresh token moi
             if (decodedToken.exp < date.getTime() / 1000) {
                 const data = await refreshToken();
-                console.log('hết hạn', data.accessToken)
+                // console.log('hết hạn', data.accessToken)
                 const refreshUser = {
                     userInfo: user,
                     accessToken: data.accessToken,
